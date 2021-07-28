@@ -3,7 +3,7 @@
     <div>
       <HeaderToolBar></HeaderToolBar>
       <Navbar></Navbar>
-      <div class="main">主区域</div>
+      <div class="main"><router-view></router-view></div>
   </div>
   </div>
 </template>
@@ -18,6 +18,12 @@ export default {
   components: {
     HeaderToolBar,
     Navbar
+  },
+  methods: {
+    showPath () {
+      // document.getElementById('main').$router.push({ path: '/bookshelf' })
+      // this.$router.push({ path: '/bookshelf' })
+    }
   }
 }
 </script>

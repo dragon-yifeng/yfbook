@@ -1,31 +1,14 @@
 <template>
   <div class="Navbar">
-<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-  <el-radio-button :label="false">展开</el-radio-button>
-  <el-radio-button :label="true">收起</el-radio-button>
-</el-radio-group>
-<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-  <el-submenu index="1">
-    <template #title>
-      <i class="el-icon-location"></i>
-      <span>导航一</span>
-    </template>
-    <el-menu-item-group>
-      <template #title>分组一</template>
-      <el-menu-item index="1-1">选项1</el-menu-item>
-      <el-menu-item index="1-2">选项2</el-menu-item>
-    </el-menu-item-group>
-    <el-menu-item-group title="分组2">
-      <el-menu-item index="1-3">选项3</el-menu-item>
-    </el-menu-item-group>
-    <el-submenu index="1-4">
-      <template #title>选项4</template>
-      <el-menu-item index="1-4-1">选项1</el-menu-item>
-    </el-submenu>
-  </el-submenu>
+  <el-button :class="icon" v-model="isCollapse" plain @click="change"></el-button>
+  <el-menu default-active="1" class="el-menu-vertical-demo" @select="handleSelect" :collapse="isCollapse">
+  <el-menu-item index="1" >
+    <i class="el-icon-menu"></i>
+    <template #title>我的书架</template>
+  </el-menu-item>
   <el-menu-item index="2">
     <i class="el-icon-menu"></i>
-    <template #title>导航二</template>
+    <template #title>网络书城</template>
   </el-menu-item>
   <el-menu-item index="3" disabled>
     <i class="el-icon-document"></i>
@@ -44,15 +27,22 @@ export default {
   name: 'Navbar',
   data () {
     return {
-      isCollapse: true
+      isCollapse: false,
+      icon: 'el-icon-s-fold'
     }
   },
   methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
+    change () {
+      this.isCollapse = !this.isCollapse
+      if (this.icon === 'el-icon-s-fold') {
+        this.icon = 'el-icon-s-unfold'
+      } else {
+        this.icon = 'el-icon-s-fold'
+      }
     },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath)
+    handleSelect (key, keyPath) {
+      console.log(key)
+      this.$parent.showPath()
     }
   }
 }
@@ -69,8 +59,29 @@ export default {
     overflow-y: auto; /* 当内容过多时y轴出现滚动条 */
     background-color: #FFFFFF;
   }
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
+  .Navbar .el-button {
+    width: 35px;
+    height: 35px;
+    color: #909399;
+    background: #FFFFFF;
+    border: #FFFFFF;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 13px;
+  }
+  .Navbar .el-button.is-plain:hover {
+    color: #909399;
+    border: #FFFFFF;
+    background-color: #FFFFFF;
+  }
+  .Navbar .el-button.is-plain:focus {
+    color: #909399;
+    border: #FFFFFF;
+    background-color: #FFFFFF;
+  }
+  .Navbar .el-menu {
+    border-right:0px;
   }
 </style>

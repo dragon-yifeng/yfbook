@@ -1,21 +1,19 @@
 <template>
 <BaseFrame></BaseFrame>
   <div id="App">
-    <Home></Home>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import BaseFrame from './components/BaseFrame.vue'
-import Home from './views/Home.vue'
 
 export default {
   name: 'App',
   components: {
     // HelloWorld
-    BaseFrame,
-    Home
+    BaseFrame
   }
 }
 </script>
