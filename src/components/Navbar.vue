@@ -1,12 +1,12 @@
 <template>
-  <div class="Navbar">
+  <div class="Navbar" ref="navbar">
   <el-button :class="icon" v-model="isCollapse" plain @click="change"></el-button>
-  <el-menu default-active="1" class="el-menu-vertical-demo" @select="handleSelect" :collapse="isCollapse">
-  <el-menu-item index="1" >
+  <el-menu default-active="/bookshelf" class="el-menu-vertical-demo" @select="handleSelect" :collapse="isCollapse">
+  <el-menu-item index="/bookshelf">
     <i class="el-icon-menu"></i>
     <template #title>我的书架</template>
   </el-menu-item>
-  <el-menu-item index="2">
+  <el-menu-item index="/onlineBooks">
     <i class="el-icon-menu"></i>
     <template #title>网络书城</template>
   </el-menu-item>
@@ -36,14 +36,29 @@ export default {
       this.isCollapse = !this.isCollapse
       if (this.icon === 'el-icon-s-fold') {
         this.icon = 'el-icon-s-unfold'
+        this.$refs.navbar.style.width = '60px'
+        this.$parent.$refs.main.style.left = '60px'
       } else {
         this.icon = 'el-icon-s-fold'
+        this.$refs.navbar.style.width = '120px'
+        this.$parent.$refs.main.style.left = '120px'
       }
     },
     handleSelect (key, keyPath) {
-      console.log(key)
-      this.$parent.showPath()
+      // console.log(keyPath)
+      this.$parent.showPath(keyPath)
     }
+  },
+  watch: {
+    $route (to) {
+      // setTimeout(() => { // 路由跳转
+      //   this.$router.push({ path: '/bookshelf' })
+      // }, 100)
+      // console.log(to)
+    }
+  },
+  mounted: function () {
+    this.$router.push({ path: '/bookshelf' })
   }
 }
 </script>
@@ -56,20 +71,21 @@ export default {
     top: 72px;  /* 距离上面50像素 */
     left: 0px;
     bottom: 0px;
-    overflow-y: auto; /* 当内容过多时y轴出现滚动条 */
+    /* overflow-y: auto; 当内容过多时y轴出现滚动条 */
     background-color: #FFFFFF;
   }
   .Navbar .el-button {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     color: #909399;
     background: #FFFFFF;
     border: #FFFFFF;
-    font-size: 35px;
+    font-size: 22px;
+    /* font-weight: 100; */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 13px;
+    margin-left: 12px;
   }
   .Navbar .el-button.is-plain:hover {
     color: #909399;

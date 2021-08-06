@@ -8,12 +8,22 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import BaseFrame from './components/BaseFrame.vue'
+const { remote } = window.require('electron')
+var json = require('../public/config.json')
 
 export default {
   name: 'App',
   components: {
     // HelloWorld
     BaseFrame
+  },
+  created: function () {
+    console.log(json)
+    var path = json.path
+    if (path === '') {
+      const configDir = remote.app.getPath('userData')
+      console.log(configDir)
+    }
   }
 }
 </script>

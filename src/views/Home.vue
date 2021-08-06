@@ -3,7 +3,7 @@
     <div>
       <HeaderToolBar></HeaderToolBar>
       <Navbar></Navbar>
-      <div class="main"><router-view></router-view></div>
+      <div class="main" ref="main"><router-view></router-view></div>
   </div>
   </div>
 </template>
@@ -20,9 +20,8 @@ export default {
     Navbar
   },
   methods: {
-    showPath () {
-      // document.getElementById('main').$router.push({ path: '/bookshelf' })
-      // this.$router.push({ path: '/bookshelf' })
+    showPath (path) {
+      this.$router.push({ path: path[0] })
     }
   }
 }
