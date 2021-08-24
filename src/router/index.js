@@ -16,6 +16,11 @@ const routes = [
         path: '/onlineBooks',
         name: 'OnlineBooks',
         component: () => import('../views/OnlineBooks.vue')
+      },
+      {
+        path: '/setting',
+        name: 'Setting',
+        component: () => import('../views/Setting.vue')
       }
     ]
   },

@@ -1,9 +1,11 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, session, globalShortcut, Menu } from 'electron'
+import { app, protocol, BrowserWindow, session, globalShortcut, Menu, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const path = require('path')
+const exec = require('child_process').exec
+const file = require('./filesOption.js')
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -12,7 +14,6 @@ protocol.registerSchemesAsPrivileged([
 
 async function createWindow () {
   // Create the browser window.
-
   const win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -91,3 +92,13 @@ if (isDevelopment) {
     })
   }
 }
+// 根据地址创建文件夹
+ipcMain.on('createFiles', (event, arg) => {
+  console.log(arg)
+  file.mkdirs(arg)
+})
+
+// 往文件中写入内容
+ipcMain.on('writeFile', (event, fileName, path) => {
+  file.writeFile(path, fileName)
+})

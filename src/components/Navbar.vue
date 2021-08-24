@@ -14,9 +14,9 @@
     <i class="el-icon-document"></i>
     <template #title>导航三</template>
   </el-menu-item>
-  <el-menu-item index="4">
+  <el-menu-item index="/setting">
     <i class="el-icon-setting"></i>
-    <template #title>导航四</template>
+    <template #title>全局设置</template>
   </el-menu-item>
 </el-menu>
   </div>
